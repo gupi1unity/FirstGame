@@ -1,6 +1,7 @@
 ﻿using Assets.Develop.CommonServices.AssetsManagment;
 using Assets.Develop.CommonServices.CoroutinePerformer;
 using Assets.Develop.CommonServices.LoadingScreen;
+using Assets.Develop.CommonServices.SceneManagment;
 using Assets.Develop.DI;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,8 @@ namespace Assets.Develop.EntryPoint
             RegisterResourcesAssetLoader(projectContainer);
             RegisterCoroutinePerformer(projectContainer);
             RegisterLoadingCurtain(projectContainer);
+            RegisterSceneLoader(projectContainer);
+            RegisterSceneSwitcher(projectContainer);
 
             projectContainer.Resolve<ICoroutinePerformer>().StartPerform(_gameBootstrap.Run(projectContainer));
         }
@@ -57,6 +60,16 @@ namespace Assets.Develop.EntryPoint
                 StandartLoadingCurtain loadingCurtain = resourcesAssetLoader.LoadResource<StandartLoadingCurtain>("Infrastructure/StandartLoadingCurtain");
                 return Instantiate(loadingCurtain);
             });
+        }
+
+        private void RegisterSceneLoader(DIContainer container)
+        {
+            container.RegisterAsSingle<ISceneLoader>(c => new DefaultSceneLoader());
+        }
+
+        private void RegisterSceneSwitcher(DIContainer container)
+        {
+            container.RegisterAsSingle<SceneSwitcher>(c => new SceneSwitcher(c.Resolve<ICoroutinePerformer>(), c.Resolve<ILoadingCurtain>(), c.Resolve<ISceneLoader>(), container));
         }
     }
 }

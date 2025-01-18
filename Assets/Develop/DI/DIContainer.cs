@@ -31,7 +31,7 @@ namespace Assets.Develop.DI
                 throw new System.Exception($"{typeof(T)} Already registered");
             }
 
-            Registration registration = new Registration(creator);
+            Registration registration = new Registration(container => creator.Invoke(container));
             _container.Add(typeof(T), registration);
         }
 
