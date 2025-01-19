@@ -115,7 +115,7 @@ namespace Assets.Develop.CommonServices.SceneManagment
             _loadingCurtain.Show();
 
             yield return _sceneLoader.LoadAsync(SceneID.Empty);
-            yield return _sceneLoader.LoadAsync(SceneID.MainMenu);
+            yield return _sceneLoader.LoadAsync(SceneID.Gameplay);
 
             GameplayBootstrap gameplayBootstrap = Object.FindAnyObjectByType<GameplayBootstrap>();
 

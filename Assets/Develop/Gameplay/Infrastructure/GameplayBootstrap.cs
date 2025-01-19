@@ -21,7 +21,7 @@ public class GameplayBootstrap : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            _container.Resolve<SceneSwitcher>().ProccesSwitchSceneFor(new OutputMainMenuArgs(new MainMenuInputArgs()));
+            _container.Resolve<SceneSwitcher>().ProccesSwitchSceneFor(new OutputGameplayArgs(new MainMenuInputArgs()));
         }
     }
 }
