@@ -1,3 +1,4 @@
+using Assets.Develop.CommonServices.AssetsManagment;
 using Assets.Develop.CommonServices.SceneManagment;
 using Assets.Develop.DI;
 using System.Collections;
@@ -12,9 +13,15 @@ public class GameplayBootstrap : MonoBehaviour
     {
         _container = container;
 
-        Debug.Log($"Запуск уровня {gameplayInputArgs.LevelNumber}");
+        Debug.Log($"Запуск уровня {gameplayInputArgs.LevelName}");
 
-        yield return new WaitForSeconds(1f);
+        RegisterArrayGenerator(container);
+        RegisterPlayerArrayChecker(container);
+
+        PlayerArrayChecker playerArrayChecker = _container.Resolve<PlayerArrayChecker>();
+        playerArrayChecker.Initialize(_container.Resolve<ArrayGenerator>());
+
+        yield return null;
     }
 
     private void Update()
@@ -24,4 +31,21 @@ public class GameplayBootstrap : MonoBehaviour
             _container.Resolve<SceneSwitcher>().ProccesSwitchSceneFor(new OutputGameplayArgs(new MainMenuInputArgs()));
         }
     }
+
+    private void RegisterArrayGenerator(DIContainer container)
+    {
+        container.RegisterAsSingle<ArrayGenerator>(c => new ArrayGenerator());
+    }
+
+    private void RegisterPlayerArrayChecker(DIContainer container)
+    {
+        container.RegisterAsSingle<PlayerArrayChecker>(c =>
+        {
+            ResourcesAssetLoader resourcesAssetLoader = c.Resolve<ResourcesAssetLoader>();
+            PlayerArrayChecker playerArrayChecker = resourcesAssetLoader.LoadResource<PlayerArrayChecker>("Infrastructure/PlayerArrayChecker");
+            return Instantiate(playerArrayChecker);
+        });
+    }
+
+
 }

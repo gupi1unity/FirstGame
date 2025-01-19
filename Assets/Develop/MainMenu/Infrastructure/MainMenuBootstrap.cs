@@ -8,6 +8,9 @@ public class MainMenuBootstrap : MonoBehaviour
 {
     private DIContainer _container;
 
+    private const string _numbersLevelName = "Numbers";
+    private const string _wordsLevelName = "Words";
+
     public IEnumerator Run(DIContainer container, MainMenuInputArgs mainMenuInputArgs)
     {
         _container = container;
@@ -19,9 +22,14 @@ public class MainMenuBootstrap : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            _container.Resolve<SceneSwitcher>().ProccesSwitchSceneFor(new OutputMainMenuArgs(new GameplayInputArgs(2)));
+            _container.Resolve<SceneSwitcher>().ProccesSwitchSceneFor(new OutputMainMenuArgs(new GameplayInputArgs(_numbersLevelName)));
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            _container.Resolve<SceneSwitcher>().ProccesSwitchSceneFor(new OutputMainMenuArgs(new GameplayInputArgs(_wordsLevelName)));
         }
     }
 }

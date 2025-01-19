@@ -8,11 +8,11 @@ namespace Assets.Develop.CommonServices.SceneManagment
 {
     public class GameplayInputArgs : IInputSceneArgs
     {
-        public int LevelNumber { get; }
+        public string LevelName { get; }
 
-        public GameplayInputArgs(int levelNumber)
+        public GameplayInputArgs(string levelName)
         {
-            LevelNumber = levelNumber;
+            LevelName = levelName;
         }
     }
 }
