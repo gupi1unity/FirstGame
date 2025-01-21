@@ -19,7 +19,7 @@ public class GameplayBootstrap : MonoBehaviour
         RegisterPlayerArrayChecker(container);
 
         PlayerArrayChecker playerArrayChecker = _container.Resolve<PlayerArrayChecker>();
-        playerArrayChecker.Initialize(_container, _container.Resolve<ArrayGenerator>(), gameplayInputArgs.Gamemode);
+        playerArrayChecker.Initialize(_container, gameplayInputArgs.Gamemode);
 
         yield return null;
     }

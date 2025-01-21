@@ -24,10 +24,10 @@ public class PlayerArrayChecker : MonoBehaviour
 
     private int _currentIndex;
 
-    public void Initialize(DIContainer container, ArrayGenerator arrayGenerator, Gamemods gamemode)
+    public void Initialize(DIContainer container, Gamemods gamemode)
     {
         _container = container;
-        _arrayGenerator = arrayGenerator;
+        _arrayGenerator = _container.Resolve<ArrayGenerator>();
         _gamemode = gamemode;
         _isGameActive = true;
         _currentIndex = 0;
@@ -35,11 +35,11 @@ public class PlayerArrayChecker : MonoBehaviour
         switch (gamemode)
         {
             case Gamemods.WordArray:
-                _randomArrayWords = arrayGenerator.GenerateRandomWordsArray(_arrayLength);
+                _randomArrayWords = _arrayGenerator.GenerateRandomWordsArray(_arrayLength);
                 _isWordsGamemode = true;
                 break;
             case Gamemods.NumbersArray:
-                _randomArrayNumbers = arrayGenerator.GenerateRandomNumbersArray(_arrayLength);
+                _randomArrayNumbers = _arrayGenerator.GenerateRandomNumbersArray(_arrayLength);
                 _isNumbersGamemode = true;
                 break;
         }
