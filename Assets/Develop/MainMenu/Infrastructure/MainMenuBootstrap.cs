@@ -1,5 +1,6 @@
 using Assets.Develop.CommonServices.SceneManagment;
 using Assets.Develop.DI;
+using Assets.Develop.MainMenu;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,12 +25,12 @@ public class MainMenuBootstrap : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            _container.Resolve<SceneSwitcher>().ProccesSwitchSceneFor(new OutputMainMenuArgs(new GameplayInputArgs(_numbersLevelName)));
+            _container.Resolve<SceneSwitcher>().ProccesSwitchSceneFor(new OutputMainMenuArgs(new GameplayInputArgs(Gamemods.NumbersArray)));
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            _container.Resolve<SceneSwitcher>().ProccesSwitchSceneFor(new OutputMainMenuArgs(new GameplayInputArgs(_wordsLevelName)));
+            _container.Resolve<SceneSwitcher>().ProccesSwitchSceneFor(new OutputMainMenuArgs(new GameplayInputArgs(Gamemods.WordArray)));
         }
     }
 }

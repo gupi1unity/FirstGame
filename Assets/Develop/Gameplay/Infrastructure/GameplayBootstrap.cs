@@ -13,13 +13,13 @@ public class GameplayBootstrap : MonoBehaviour
     {
         _container = container;
 
-        Debug.Log($"Запуск уровня {gameplayInputArgs.LevelName}");
+        Debug.Log($"Запуск уровня {gameplayInputArgs.Gamemode.ToString()}");
 
         RegisterArrayGenerator(container);
         RegisterPlayerArrayChecker(container);
 
         PlayerArrayChecker playerArrayChecker = _container.Resolve<PlayerArrayChecker>();
-        playerArrayChecker.Initialize(_container.Resolve<ArrayGenerator>());
+        playerArrayChecker.Initialize(_container, _container.Resolve<ArrayGenerator>(), gameplayInputArgs.Gamemode);
 
         yield return null;
     }

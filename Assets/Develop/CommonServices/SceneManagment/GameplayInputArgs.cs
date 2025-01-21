@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Develop.MainMenu;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,11 +9,11 @@ namespace Assets.Develop.CommonServices.SceneManagment
 {
     public class GameplayInputArgs : IInputSceneArgs
     {
-        public string LevelName { get; }
+        public Gamemods Gamemode { get; }
 
-        public GameplayInputArgs(string levelName)
+        public GameplayInputArgs(Gamemods gamemode)
         {
-            LevelName = levelName;
+            Gamemode = gamemode;
         }
     }
 }
